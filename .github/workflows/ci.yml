@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install Pillow PyYAML
+
+      - name: Compute changed artists and run validator
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          BASE_REF=${BASE_REF:-main}
+          git fetch --no-tags --prune --depth=1 origin $BASE_REF || true
+          CHANGED_FILES=$(git diff --name-only origin/$BASE_REF...HEAD || true)
+          CHANGED_MBIDS=$(echo "$CHANGED_FILES" | grep '^artists/' | awk -F'/' '{print $2}' | sort -u | paste -sd, -)
+          echo "Changed artist MBIDs: $CHANGED_MBIDS"
+          if [ -n "$CHANGED_MBIDS" ]; then
+            python3 scripts/validate.py --only "$CHANGED_MBIDS" --check-mb
+          else
+            python3 scripts/validate.py
+          fi

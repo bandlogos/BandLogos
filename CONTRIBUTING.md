@@ -1,0 +1,254 @@
+## Contributing Guidelines
+
+Thank you for contributing. The rules below help keep the repository consistent and easy to use.
+
+If something is unclear, open an issue before submitting a pull request.
+
+### Basic requirements
+
+Every submission must:
+
+- Use a valid MusicBrainz Artist ID (MBID)
+- Place files in the correct MBID directory
+- Follow the asset guidelines in this document
+- Include or update `metadata.yaml`
+
+### Required asset
+
+`logo.png` is required for every artist.
+
+Recommended logo guidelines:
+
+- Transparent background
+- Flat design (no shadows or glow)
+- No baked-in backgrounds
+- Visually centered
+- Square format
+- Resolution: minimum 1024×1024, maximum 2048×2048
+
+SVG source files are optional but encouraged.
+
+### Optional assets
+
+#### Poster
+
+`poster.png` is optional for photo or illustration based artist images.
+
+Guidelines:
+
+- Square format
+- Minimum 1024×1024, maximum 2048×2048
+- Avoid heavy text overlays
+
+#### Fanart
+
+`fanart.png` is optional for wide background images.
+
+Guidelines:
+
+- Minimum 1920×1080, maximum 3840×2160
+- Avoid logos or text overlays
+
+### Alternate assets
+
+Alternates may be included alongside the primary logo (for example light/dark variants).
+
+Naming examples:
+
+- `logo-alt.png`
+- `logo-dark.png`
+- `logo-light.png`
+
+Rules:
+
+- One primary `logo.png` must exist
+- Alternates should follow the same resolution and format rules
+
+### Metadata
+
+Include a `metadata.yaml` file in each artist directory. Example:
+
+```
+artist: Metallica
+mbid: 65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab
+source: official
+notes: Primary logo optimized for multiple platforms
+```
+
+If `mbid` is present in `metadata.yaml`, it should match the artist directory name.
+
+For help finding an artist's MBID, see: [docs/MBID_LOOKUP.md](docs/MBID_LOOKUP.md)
+
+### Review and CI
+
+Automated checks should validate:
+
+- Directory structure and file naming
+- Valid MBID format (UUID)
+- Required files are present (`logo.png`, `metadata.yaml`)
+- Image dimensions and aspect ratio
+- Presence of transparency for `logo.png`
+
+Manual review focuses on:
+
+- Visual centering
+- Safe area and padding
+- Overall artistic quality
+
+Pull requests that fail automated checks should be updated before merging.
+
+## How to make a PR
+
+Follow these steps to contribute via a pull request (PR):
+
+1. Fork the repository on GitHub and clone your fork locally:
+
+```bash
+git clone https://github.com/<your-username>/BandLogos.git
+cd BandLogos
+```
+
+2. Create a feature branch. Use a descriptive name, e.g. `artist/<mbid>-add` or `fix/<mbid>-metadata`:
+
+```bash
+git checkout -b artist/65f4f0c5-add
+```
+
+3. Add your files under the correct path (use the MBID for the directory):
+
+```
+artists/<MBID>/logo.png
+artists/<MBID>/metadata.yaml
+```
+
+4. Run the validator locally before committing (see `docs/DEV.md`):
+
+```bash
+# basic run (no MusicBrainz checks)
+python scripts/validate.py --only <MBID>
+
+# with MusicBrainz checks (may perform network requests)
+python scripts/validate.py --only <MBID> --check-mb
+```
+
+5. Commit and push your branch to your fork, then open a PR against `bandlogos/BandLogos:main`.
+
+In the PR description include:
+- The artist name and MBID.
+- The repository path(s) changed (e.g., `artists/<MBID>/logo.png`).
+- Source/origin of the asset (official, fan-made, recreated) and any attribution.
+- Any design notes (safe area, alternate variants, intended use).
+- Screenshots or preview images where helpful.
+
+6. Address any CI failures or reviewer feedback. Keep the branch focused to the single contribution.
+
+7. Once approved and CI is green, maintainers will merge or request further changes.
+
+Thank you — small, well-documented PRs are easiest to review and merge.
+Contributing Guidelines
+
+Thank you for contributing. The rules below exist to keep the repository usable and consistent.
+
+If something is unclear, open an issue before submitting a pull request.
+
+Basic requirements
+
+Every submission must:
+	•	Use a valid MusicBrainz Artist ID
+	•	Place files in the correct MBID directory
+	## Contributing Guidelines
+
+	Thank you for contributing. The rules below help keep the repository consistent and easy to use.
+
+	If something is unclear, open an issue before submitting a pull request.
+
+	### Basic requirements
+
+	Every submission must:
+
+	- Use a valid MusicBrainz Artist ID (MBID)
+	- Place files in the correct MBID directory
+	- Follow the asset guidelines in this document
+	- Include or update `metadata.yaml`
+
+	### Required asset
+
+	`logo.png` is required for every artist.
+
+	Recommended logo guidelines:
+
+	- Transparent background
+	- Flat design (no shadows or glow)
+	- No baked-in backgrounds
+	- Visually centered
+	- Square format
+	- Resolution: minimum 1024×1024, maximum 2048×2048
+
+	SVG source files are optional but encouraged.
+
+	### Optional assets
+
+	#### Poster
+
+	`poster.png` is optional for photo or illustration based artist images.
+
+	Guidelines:
+
+	- Square format
+	- Minimum 1024×1024, maximum 2048×2048
+	- Avoid heavy text overlays
+
+	#### Fanart
+
+	`fanart.png` is optional for wide background images.
+
+	Guidelines:
+
+	- Minimum 1920×1080, maximum 3840×2160
+	- Avoid logos or text overlays
+
+	### Alternate assets
+
+	Alternates may be included alongside the primary logo (for example light/dark variants).
+
+	Naming examples:
+
+	- `logo-alt.png`
+	- `logo-dark.png`
+	- `logo-light.png`
+
+	Rules:
+
+	- One primary `logo.png` must exist
+	- Alternates should follow the same resolution and format rules
+
+	### Metadata
+
+	Include a `metadata.yaml` file in each artist directory. Example:
+
+	```
+	artist: Metallica
+	mbid: 65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab
+	source: official
+	notes: Primary logo optimized for multiple platforms
+	```
+
+	If `mbid` is present in `metadata.yaml`, it should match the artist directory name.
+
+	### Review and CI
+
+	Automated checks should validate:
+
+	- Directory structure and file naming
+	- Valid MBID format (UUID)
+	- Required files are present (`logo.png`, `metadata.yaml`)
+	- Image dimensions and aspect ratio
+	- Presence of transparency for `logo.png`
+
+	Manual review focuses on:
+
+	- Visual centering
+	- Safe area and padding
+	- Overall artistic quality
+
+	Pull requests that fail automated checks should be updated before merging.

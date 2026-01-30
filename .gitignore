@@ -1,0 +1,7 @@
+# Local development and editor files
+local_dev/
+.venv/
+venv/
+__pycache__/
+.DS_Store
+
